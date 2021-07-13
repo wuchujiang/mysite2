@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+    <script src="/static/test.js"></script>
+    <script>
+        var d = {{data|safe}}
+    </script>
+</head>
+<body>
+    <h1>用户输入：</h1>
+    <form action="/index/" method="post">
+        {% csrf_token %}
+        名称：<input type="text" name="name" /><br />
+        密码：<input type="password" name="password" /><br />
+        <input type="submit" value="提交" />
+    </form>
+<h1>用户展示：</h1>
+        <table border="1">
+            <thead>
+                <tr>用户名</tr>
+                <tr>密码</tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.username }}</td>
+                    <td>{{ item.password }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+</body>
+</html>
